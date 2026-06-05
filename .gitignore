@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.pytest.db
+coverage/
+
+# Misc
+.DS_Store
+*.log
+*.pem
+.vercel
+
+# Python
+.mypy_cache/
+.ruff_cache/
