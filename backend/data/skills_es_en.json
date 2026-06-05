@@ -1,0 +1,10 @@
+[
+  "Python", "Java", "JavaScript", "TypeScript", "Go", "Rust", "C++", "C#", "Ruby", "PHP",
+  "FastAPI", "Django", "Flask", "Spring", "Node.js", "Express", "React", "Vue", "Angular",
+  "Next.js", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Docker", "Kubernetes", "AWS",
+  "Azure", "GCP", "Git", "GitHub Actions", "CI/CD", "Terraform", "Ansible", "Linux",
+  "SQL", "NoSQL", "REST", "GraphQL", "gRPC", "Microservices", "Agile", "Scrum",
+  "Machine Learning", "TensorFlow", "PyTorch", "Pandas", "NumPy", "Spark", "Kafka",
+  "Celery", "RabbitMQ", "Elasticsearch", "Nginx", "HTML", "CSS", "Tailwind",
+  "Selenium", "Playwright", "pytest", "JUnit", "JUnit5", "Maven", "Gradle"
+]

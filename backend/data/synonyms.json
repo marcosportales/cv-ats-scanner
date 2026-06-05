@@ -1,0 +1,19 @@
+{
+  "python": ["py"],
+  "javascript": ["js", "ecmascript"],
+  "typescript": ["ts"],
+  "kubernetes": ["k8s"],
+  "postgresql": ["postgres", "psql"],
+  "amazon web services": ["aws"],
+  "machine learning": ["ml"],
+  "artificial intelligence": ["ai"],
+  "react": ["reactjs", "react.js"],
+  "node.js": ["nodejs", "node"],
+  "fastapi": ["fast api"],
+  "docker": ["containerization"],
+  "ci/cd": ["cicd", "continuous integration"],
+  "github actions": ["gh actions"],
+  "microservices": ["micro services"],
+  "ingles": ["english"],
+  "espanol": ["spanish"]
+}
