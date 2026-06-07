@@ -1,10 +1,40 @@
 [
   "Python", "Java", "JavaScript", "TypeScript", "Go", "Rust", "C++", "C#", "Ruby", "PHP",
-  "FastAPI", "Django", "Flask", "Spring", "Node.js", "Express", "React", "Vue", "Angular",
-  "Next.js", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Docker", "Kubernetes", "AWS",
-  "Azure", "GCP", "Git", "GitHub Actions", "CI/CD", "Terraform", "Ansible", "Linux",
-  "SQL", "NoSQL", "REST", "GraphQL", "gRPC", "Microservices", "Agile", "Scrum",
-  "Machine Learning", "TensorFlow", "PyTorch", "Pandas", "NumPy", "Spark", "Kafka",
-  "Celery", "RabbitMQ", "Elasticsearch", "Nginx", "HTML", "CSS", "Tailwind",
-  "Selenium", "Playwright", "pytest", "JUnit", "JUnit5", "Maven", "Gradle"
+  "Swift", "Kotlin", "Scala", "R", "MATLAB", "Bash", "Shell",
+
+  "FastAPI", "Django", "Flask", "Spring", "Spring Boot", "Node.js", "Express", "NestJS",
+  "Rails", "Laravel", "Symfony", "Gin", "Echo",
+
+  "React", "Vue", "Angular", "Next.js", "Nuxt.js", "Svelte", "Remix",
+  "HTML", "CSS", "Sass", "SCSS", "Less", "Tailwind", "Bootstrap", "Material UI",
+  "Webpack", "Vite", "Rollup", "Babel",
+
+  "PostgreSQL", "MySQL", "MariaDB", "SQLite", "Oracle", "SQL Server",
+  "MongoDB", "Cassandra", "DynamoDB", "Firestore", "CouchDB",
+  "Redis", "Memcached", "Elasticsearch", "OpenSearch",
+
+  "Docker", "Kubernetes", "Helm", "Terraform", "Ansible", "Pulumi",
+  "AWS", "Azure", "GCP", "Heroku", "Vercel", "Netlify", "DigitalOcean",
+  "GitHub Actions", "GitLab CI", "Jenkins", "CircleCI", "Travis CI",
+  "CI/CD", "Git", "GitHub", "GitLab", "Bitbucket",
+  "Linux", "Ubuntu", "Nginx", "Apache", "Caddy",
+
+  "SQL", "NoSQL", "REST", "GraphQL", "gRPC", "WebSockets", "OpenAPI", "Swagger",
+  "Microservices", "Agile", "Scrum", "Kanban", "SOLID", "DDD", "TDD", "BDD",
+
+  "Machine Learning", "Deep Learning", "NLP", "Computer Vision",
+  "TensorFlow", "PyTorch", "Keras", "scikit-learn", "Hugging Face",
+  "Pandas", "NumPy", "SciPy", "Matplotlib", "Seaborn", "Jupyter",
+  "Spark", "Hadoop", "Kafka", "Airflow", "dbt", "MLflow",
+
+  "Celery", "RabbitMQ", "SQS", "SNS", "Pub/Sub",
+  "Selenium", "Playwright", "Cypress", "Jest", "pytest", "JUnit", "Mocha", "Chai",
+  "Maven", "Gradle", "npm", "pnpm", "yarn",
+
+  "Figma", "Storybook", "Chromatic",
+  "Jira", "Confluence", "Notion", "Slack",
+
+  "Blockchain", "Solidity", "Web3", "Unity", "Unreal Engine",
+  "iOS", "Android", "React Native", "Flutter", "Ionic",
+  "Prometheus", "Grafana", "Datadog", "Sentry", "OpenTelemetry"
 ]

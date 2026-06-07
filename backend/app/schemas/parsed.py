@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ContactInfo(BaseModel):
@@ -22,6 +22,21 @@ class ExperienceItem(BaseModel):
     skills_mentioned: list[str] = Field(default_factory=list)
 
 
+class EducationItem(BaseModel):
+    degree: str | None = None
+    institution: str | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    field_of_study: str | None = None
+
+
+class ProjectItem(BaseModel):
+    name: str | None = None
+    description: str | None = None
+    technologies: list[str] = Field(default_factory=list)
+    url: str | None = None
+
+
 class SkillsBlock(BaseModel):
     hard: list[str] = Field(default_factory=list)
     soft: list[str] = Field(default_factory=list)
@@ -33,15 +48,16 @@ class LanguageItem(BaseModel):
 
 
 class ParsedResume(BaseModel):
-    schema_version: str = "1.0"
+    # 1.1: education/projects now typed (EducationItem/ProjectItem) instead of list[dict]
+    schema_version: str = "1.1"
     language: str = "es"
     contact: ContactInfo = Field(default_factory=ContactInfo)
     sections_detected: list[str] = Field(default_factory=list)
     summary: str | None = None
     experience: list[ExperienceItem] = Field(default_factory=list)
     skills: SkillsBlock = Field(default_factory=SkillsBlock)
-    education: list[dict] = Field(default_factory=list)
-    projects: list[dict] = Field(default_factory=list)
+    education: list[EducationItem] = Field(default_factory=list)
+    projects: list[ProjectItem] = Field(default_factory=list)
     languages: list[LanguageItem] = Field(default_factory=list)
     certifications: list[str] = Field(default_factory=list)
     evidence_skills: list[str] = Field(default_factory=list)
