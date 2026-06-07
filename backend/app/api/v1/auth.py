@@ -1,12 +1,20 @@
-from fastapi import APIRouter, Depends
+from typing import Annotated
+
+from fastapi import APIRouter, Cookie, Depends, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_user
+from app.core.cookies import (
+    REFRESH_TOKEN_COOKIE,
+    clear_auth_cookies,
+    set_auth_cookies,
+)
+from app.core.exceptions import UnauthorizedError
 from app.db.models.user import User
 from app.db.session import get_db
 from app.schemas.auth import (
+    AuthSuccessResponse,
     RefreshTokenRequest,
-    TokenResponse,
     UserCreate,
     UserLogin,
     UserResponse,
@@ -21,14 +29,36 @@ async def register(data: UserCreate, db: AsyncSession = Depends(get_db)) -> User
     return await AuthService.register(db, data)
 
 
-@router.post("/login", response_model=TokenResponse)
-async def login(data: UserLogin, db: AsyncSession = Depends(get_db)) -> TokenResponse:
-    return await AuthService.login(db, data)
+@router.post("/login", response_model=AuthSuccessResponse)
+async def login(
+    data: UserLogin,
+    response: Response,
+    db: AsyncSession = Depends(get_db),
+) -> AuthSuccessResponse:
+    tokens = await AuthService.login(db, data)
+    set_auth_cookies(response, tokens.access_token, tokens.refresh_token)
+    return AuthSuccessResponse()
 
 
-@router.post("/refresh", response_model=TokenResponse)
-async def refresh_token(data: RefreshTokenRequest) -> TokenResponse:
-    return await AuthService.refresh(data.refresh_token)
+@router.post("/refresh", response_model=AuthSuccessResponse)
+async def refresh_token(
+    response: Response,
+    refresh_token_cookie: Annotated[str | None, Cookie(alias=REFRESH_TOKEN_COOKIE)] = None,
+    data: RefreshTokenRequest | None = None,
+) -> AuthSuccessResponse:
+    refresh_token = refresh_token_cookie or (data.refresh_token if data else None)
+    if not refresh_token:
+        raise UnauthorizedError()
+
+    tokens = await AuthService.refresh(refresh_token)
+    set_auth_cookies(response, tokens.access_token, tokens.refresh_token)
+    return AuthSuccessResponse()
+
+
+@router.post("/logout", response_model=AuthSuccessResponse)
+async def logout(response: Response) -> AuthSuccessResponse:
+    clear_auth_cookies(response)
+    return AuthSuccessResponse(authenticated=False)
 
 
 @router.get("/me", response_model=UserResponse)

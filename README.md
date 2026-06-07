@@ -212,7 +212,7 @@ Después vuelve a ejecutar `pnpm dev`.
 Es el comportamiento esperado. El contenedor crea el bucket de MinIO y se apaga.
 
 **El frontend no conecta con la API**  
-Comprueba que `NEXT_PUBLIC_API_URL=http://localhost:8000` en `.env` y que el backend responde en http://localhost:8000/health.
+Comprueba que `API_URL=http://localhost:8000` en `.env` (proxy interno de Next.js) y que el backend responde en http://localhost:8000/health.
 
 **Error de base de datos al arrancar el backend local**  
 Asegúrate de que PostgreSQL está `Up` (`docker compose ps`) y ejecuta `alembic upgrade head` en `backend/`.

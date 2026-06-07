@@ -35,5 +35,9 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
+class AuthSuccessResponse(BaseModel):
+    authenticated: bool = True
+
+
 class RefreshTokenRequest(BaseModel):
-    refresh_token: str
+    refresh_token: str | None = None

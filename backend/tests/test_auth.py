@@ -4,6 +4,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
+from app.core.cookies import ACCESS_TOKEN_COOKIE, REFRESH_TOKEN_COOKIE
 from app.db.base import Base
 from app.main import app
 
@@ -61,16 +62,59 @@ async def test_register_and_login(client):
         json={"email": "test@example.com", "password": "securepass123"},
     )
     assert login_response.status_code == 200
-    tokens = login_response.json()
-    assert "access_token" in tokens
-    assert "refresh_token" in tokens
+    assert login_response.json() == {"authenticated": True}
+    assert ACCESS_TOKEN_COOKIE in login_response.cookies
+    assert REFRESH_TOKEN_COOKIE in login_response.cookies
 
     me_response = await client.get(
         "/api/v1/auth/me",
-        headers={"Authorization": f"Bearer {tokens['access_token']}"},
+        cookies=login_response.cookies,
     )
     assert me_response.status_code == 200
     assert me_response.json()["email"] == "test@example.com"
+
+
+@pytest.mark.asyncio
+async def test_refresh_with_cookie(client):
+    await client.post(
+        "/api/v1/auth/register",
+        json={"email": "refresh@example.com", "password": "securepass123"},
+    )
+    login_response = await client.post(
+        "/api/v1/auth/login",
+        json={"email": "refresh@example.com", "password": "securepass123"},
+    )
+    assert login_response.status_code == 200
+
+    refresh_response = await client.post(
+        "/api/v1/auth/refresh",
+        cookies=login_response.cookies,
+    )
+    assert refresh_response.status_code == 200
+    assert refresh_response.json() == {"authenticated": True}
+    assert ACCESS_TOKEN_COOKIE in refresh_response.cookies
+
+
+@pytest.mark.asyncio
+async def test_logout_clears_cookies(client):
+    await client.post(
+        "/api/v1/auth/register",
+        json={"email": "logout@example.com", "password": "securepass123"},
+    )
+    login_response = await client.post(
+        "/api/v1/auth/login",
+        json={"email": "logout@example.com", "password": "securepass123"},
+    )
+
+    logout_response = await client.post(
+        "/api/v1/auth/logout",
+        cookies=login_response.cookies,
+    )
+    assert logout_response.status_code == 200
+    assert logout_response.json() == {"authenticated": False}
+
+    me_response = await client.get("/api/v1/auth/me")
+    assert me_response.status_code == 401
 
 
 @pytest.mark.asyncio

@@ -34,9 +34,11 @@ class Settings(BaseSettings):
 
     # Auth
     secret_key: str = "change-me-to-a-random-64-char-string-in-production"
-    access_token_expire_minutes: int = 15
+    access_token_expire_minutes: int = 60
     refresh_token_expire_days: int = 7
     algorithm: str = "HS256"
+    cookie_secure: bool = False
+    cookie_samesite: str = "lax"
 
     # CORS
     cors_origins: str = "http://localhost:3000"
